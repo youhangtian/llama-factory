@@ -1,0 +1,41 @@
+#export CUDA_VISIBLE_DEVICES=4,5,6,7
+deepspeed --include=localhost:4,5,6,7 src/train.py \
+    --deepspeed examples/deepspeed/ds_z3_config.json \
+    --stage sft \
+    --do_train \
+    --model_name_or_path /file/models/Qwen1.5-32B-Chat \
+    --dataset mydata \
+    --dataset_dir data \
+    --template qwen \
+    --finetuning_type lora \
+    --lora_target q_proj,v_proj \
+    --output_dir ./my_ft_output/qwen-32b-adapter \
+    --overwrite_cache \
+    --overwrite_output_dir \
+    --cutoff_len 1024 \
+    --preprocessing_num_workers 4 \
+    --per_device_train_batch_size 4 \
+    --per_device_eval_batch_size 4 \
+    --gradient_accumulation_steps 2 \
+    --lr_scheduler_type cosine \
+    --logging_steps 10 \
+    --warmup_steps 20 \
+    --save_steps 100 \
+    --eval_steps 100 \
+    --evaluation_strategy steps \
+    --learning_rate 5e-5 \
+    --num_train_epochs 8.0 \
+    --max_samples 3000 \
+    --val_size 0.1 \
+    --ddp_timeout 180000000 \
+    --plot_loss \
+    --fp16
+
+python src/export_model.py \
+    --model_name_or_path /file/models/Qwen1.5-32B-Chat \
+    --adapter_name_or_path ./my_ft_output/qwen-32b-adapter/ \
+    --template qwen \
+    --finetuning_type lora \
+    --export_dir ./my_ft_output/qwen-32b-ft \
+    --export_size 2 \
+    --export_legacy_format False
