@@ -1,13 +1,4 @@
 {
-  "text2sql": {
-    "file_name": "/home/tyh/codes/text2sql/json/data_cn.json",
-    "columns": {
-      "prompt": "instruction",
-      "query": "input",
-      "response": "output",
-      "history": "history"
-    }
-  },
   "mydata": {
     "file_name": "/home/tyh/codes/text2sql/json/data_all.json",
     "columns": {
