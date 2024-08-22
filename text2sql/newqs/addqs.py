@@ -33,9 +33,9 @@ ts = [
     "YEAR(dt) = YEAR(CURDATE())",
     "YEAR(dt) = YEAR(CURDATE()) AND MONTH(dt) = x",
     "YEAR(dt) = YEAR(CURDATE()) AND QUARTER(dt) = x",
-    "DATE_FORMAT(dt, '%Y') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 YEAR), '%Y')", 
-    "DATE_FORMAT(dt, '%Y') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 YEAR), '%Y') AND MONTH(dt) = x", 
-    "DATE_FORMAT(dt, '%Y') = DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 YEAR), '%Y') AND QUARTER(dt) = x",
+    "YEAR(dt) = YEAR(CURDATE()) - 1", 
+    "YEAR(dt) = YEAR(CURDATE()) - 1 AND MONTH(dt) = x", 
+    "YEAR(dt) = YEAR(CURDATE()) - 1 AND QUARTER(dt) = x",
     "DATE_FORMAT(dt, '%Y') = 'xxxx'",
     "DATE_FORMAT(dt, '%Y-%m') = 'xxxx-xx'"
 ]

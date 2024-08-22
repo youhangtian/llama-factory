@@ -21,9 +21,9 @@ def get_d(row):
 
     question = row[4]
     sql = row[5]
-    if '今年' in question:
-        if random.random() < 0.4:
-            question = question.replace('今年', '')
+    # if '今年' in question:
+    #     if random.random() < 0.4:
+    #         question = question.replace('今年', '')
     d['instruction'] = prompt.format(TABLE_INFO=TABLE_INFO, question=question)
     d['output'] = sql
     return d 
@@ -36,7 +36,7 @@ with open('../newqs/newq.csv') as f:
     for row in csv_reader:
         d = get_d(row)
         arr.append(d)
-arr = arr * 9
+arr = arr * 3
 output.extend(arr)
 print('output len:', len(output))
 
@@ -46,18 +46,8 @@ with open('../newqs/newqs.csv') as f:
     for row in csv_reader:
         d = get_d(row)
         arr.append(d)
-arr = arr * 3
 output.extend(arr)
 print('output len', len(output))
-
-arr = []
-with open('../indicator/newq.csv') as f:
-    csv_reader = csv.reader(f)
-    for row in csv_reader:
-        d = get_d(row)
-        arr.append(d)
-output.extend(arr)
-print('output len:', len(output))
 
 random.shuffle(output)
 print(output[0])

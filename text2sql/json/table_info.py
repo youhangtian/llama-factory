@@ -1,12 +1,4 @@
 TABLE_INFO = '''
-CREATE TABLE `zkyc_indicator_newest_info_dt` (
-  `region_name` varchar(50) DEFAULT NULL COMMENT '地区名称{绍兴市/越城区/柯桥区/上虞区/新昌县/诸暨市/嵊州市}',
-  `indicator_name` varchar(50) DEFAULT NULL COMMENT '指标名称',
-  `indicator_value` varchar(50) DEFAULT NULL COMMENT '指标值',
-  `unit` varchar(50) DEFAULT NULL COMMENT '单位',
-  `update_frequency_name` varchar(50) DEFAULT NULL COMMENT '更新频率',
-  `date` varchar(50) DEFAULT NULL COMMENT '创建日期'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='绍兴市指标统计表每日最新数据'
 CREATE TABLE `zkyc_event_info_dt` (
   `id` varchar(50) NOT NULL COMMENT '事件ID',
   `source` varchar(5) DEFAULT NULL COMMENT '渠道id',
