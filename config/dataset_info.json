@@ -1,6 +1,6 @@
 {
   "mydata": {
-    "file_name": "../text2sql/json/data_all.json",
+    "file_name": "../text2sql/data_all.json",
     "columns": {
       "prompt": "instruction",
       "query": "input",

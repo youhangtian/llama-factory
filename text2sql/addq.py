@@ -1,11 +1,10 @@
-import sys
 import requests
 import csv
-import json
 from openpyxl import load_workbook 
 from tqdm import tqdm
 
-api_url = 'http://0.0.0.0:9966/chat'
+api_url = 'http://localhost:11434/api/generate'
+model_name = 'qwen2:72b'
 data_name = 'text2sql.xlsx'
 sheet_name = 'Sheet1'
 output_name = 'newq.csv'
@@ -47,12 +46,16 @@ for row in tqdm(sheet.iter_rows(min_row=2, values_only=True)):
     print('prompt:', prompt)
 
     request_data = {
-        'input': prompt,
-        'stream': False
+        'model': model_name,
+        'prompt': prompt,
+        'stream': False,
+        'options': {
+            'temprature': 0.8
+        }
     }
 
     response = requests.post(api_url, json=request_data)
-    output = json.loads(response.json())['output']
+    output = response.json()['response']
     print('output:', output)
 
     o = [r for r in row]

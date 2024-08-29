@@ -15,15 +15,12 @@ sql代码:
 
 def get_d(row):
     d = {}
-    d['db_id'] = 'database'
     d['input'] = ''
     d['history'] = []
 
     question = row[4]
     sql = row[5]
-    # if '今年' in question:
-    #     if random.random() < 0.4:
-    #         question = question.replace('今年', '')
+
     d['instruction'] = prompt.format(TABLE_INFO=TABLE_INFO, question=question)
     d['output'] = sql
     return d 
@@ -31,7 +28,7 @@ def get_d(row):
 output = []
 
 arr = []
-with open('../newqs/newq.csv') as f:
+with open('newq.csv') as f:
     csv_reader = csv.reader(f)
     for row in csv_reader:
         d = get_d(row)
@@ -41,7 +38,7 @@ output.extend(arr)
 print('output len:', len(output))
 
 arr = []
-with open('../newqs/newqs.csv') as f:
+with open('newqs.csv') as f:
     csv_reader = csv.reader(f)
     for row in csv_reader:
         d = get_d(row)
@@ -50,8 +47,7 @@ output.extend(arr)
 print('output len', len(output))
 
 random.shuffle(output)
-print(output[0])
-print(output[1])
+print(random.choices(output))
 
 with open('data_all.json', 'w') as f:
     json.dump(output, f, indent=2, ensure_ascii=False)

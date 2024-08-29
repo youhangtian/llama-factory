@@ -1,11 +1,10 @@
-import sys
 import requests
 import csv
-import json
 import random
 from tqdm import tqdm
 
-api_url = 'http://0.0.0.0:9966/chat'
+api_url = 'http://localhost:11434/api/generate'
+model_name = 'qwen2:72b'
 data_name = 'newq.csv'
 output_name = 'newqs.csv'
 num = 20
@@ -70,13 +69,16 @@ with open(data_name) as f:
             print('prompt:', prompt)
 
             request_data = {
-                'input': prompt, 
+                'model': model_name,
+                'prompt': prompt,
                 'stream': False,
-                'temp': 0.8
+                'options': {
+                    'temprature': 0.8
+                }
             }
 
             response = requests.post(api_url, json=request_data)
-            output = json.loads(response.json())['output']
+            output = response.json()['response']
             print('output:', output)
 
             q2 = output.split('```question')[-1].split('```')[0]
